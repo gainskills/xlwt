@@ -278,7 +278,7 @@ class WriteAccessRecord(BiffRecord):
         uowner_len = len(uowner)
         if isinstance(uowner, six.text_type):
             uowner = uowner.encode('ascii')  # probably not ascii, but play it safe until we know more
-        self._rec_data = pack('%ds%ds' % (uowner_len, 0x70 - uowner_len), uowner, b' '*(0x70 - uowner_len))
+        self._rec_data = pack('%ds%ds' % (uowner_len, 0x70 - uowner_len), b'\x16\x00' + uowner, b' '*(0x70 - uowner_len))
 
 
 class DSFRecord(BiffRecord):
